@@ -1,0 +1,15 @@
+{
+  "todos" : "ToDo´s",
+  "add_todo" : "ToDo ekle",
+  "no_todos" : "ToDo yok",
+  "title_add": "başlık",
+  "description": "Tanım",
+  "save": "kurtarıcı",
+  "id": "id",
+  "task" : "görev",
+  "add_task" : "görev ekle",
+  "created_at" : "yaratıldı",
+  "updated_at" : "güncelleme",
+  "done" : "Tamamlandı",
+  "cancel" : "iptal etmek"
+}

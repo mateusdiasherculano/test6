@@ -1,0 +1,32 @@
+# Changelog
+
+## [0.0.2]
+
+### Added
+
+- Changed build version.
+- Todo lists items
+- Created HomePage to display a list of tasks fetched from the GraphQL API.
+- Implemented the entire flow to fetch data from the GraphQL API.
+- Implemented functionality for the HomePage to fetch and display tasks from the GraphQL API.
+- Added functionality to refresh the task list and display loading indicators.
+- Implemented AddToDoPage for adding new tasks with persistence to the API.
+- Updated state management to handle task creation and updating within ToDoCubit.
+
+
+### Changed
+
+- Updated HomePage to handle and display the list of tasks with real-time updates from the API.
+- Updated the fetchToDosList method to reflect the latest API data and state management improvements.
+- Improved error handling in the HomePage to provide better user feedback.
+
+
+### Fixed
+
+- Fixed issue where the HomePage was not displaying updated tasks after adding a new task.
+- Corrected DateTime formatting in the HomePage to ensure consistent display of task creation dates.
+
+
+### Removed
+
+-

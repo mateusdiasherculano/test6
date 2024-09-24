@@ -1,0 +1,15 @@
+{
+  "todos" : "ToDo´s",
+  "add_todo" : "Add ToDo",
+  "no_todos" : "No ToDo´s",
+  "title_add": "Title",
+  "description": "Description",
+  "save": "Save",
+  "id": "id",
+  "task" : "task",
+  "add" : "add task",
+  "created_at" : "created_at",
+  "updated_at" : "updated_at",
+  "done" : "done",
+  "cancel" : "cancel"
+}

@@ -1,0 +1,15 @@
+{
+  "todos" : "ToDo´s",
+  "add_todo" : "Hinzufügen",
+  "no_todos" : "Keine ToDo´s",
+  "title_add": "Titel",
+  "description": "Beschreibung",
+  "save": "speichern",
+  "id": "Ausweis",
+  "task" : "Aufgabe",
+  "add_task" : "Aufgabe hinzufügen",
+  "created_at" : "hergestellt in",
+  "updated_at" : "aktualisiert am",
+  "done" : "Erledigt",
+  "cancel" : "stornieren"
+}

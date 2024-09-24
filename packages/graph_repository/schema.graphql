@@ -1,0 +1,828 @@
+enum ApplyPolicy {
+    BEFORE_RESOLVER
+    AFTER_RESOLVER
+    VALIDATION
+}
+
+type Query {
+    verifyEmail(email: String!): Boolean!
+    resetPassword(email: String!, name: String!): Boolean!
+    search(text: String!, filter: FilterDataInput): SearchResult!
+    checkUsername(username: String!): Boolean!
+    searchData: SearchData
+    availableSearchData: SearchData
+    countries: [Country!]!
+    places: [Place!]!
+    placesAdmin: [Place!]!
+    verifyPlaces: [Place!]!
+    users: [User!]!
+    reviews: [Review!]!
+    reviewsForPlace(id: String!): [Review!]!
+    deals: [Deal!]!
+    books: [Book!]!
+    cinemas: [Cinema!]!
+    events: [Event!]!
+    jobs: [Job!]!
+    attractions: [Attraction!]!
+    toDos: [ToDo!]!
+    stories: [Story!]!
+    videos: [Video!]!
+    user(id: String!): User!
+    qRs: [QR!]!
+    qr(code: String!): QR
+    radios: [Radio!]!
+    allReviewUsers(id: String!): [User!]!
+}
+
+type Mutation {
+    addPlace(input: PlaceInput!): Place!
+    editPlace(input: PlaceInput!): Place!
+    deletePlaceAsync(id: String!, userId: String!): Boolean!
+    addReview(input: ReviewInput!): Review!
+    editReview(input: ReviewInput!): Review!
+    deleteReviewAsync(id: String!): Boolean!
+    addUser(input: UserInput!): User!
+    editUser(input: UserInput!): User!
+    deleteUser(user: UserInput!): Boolean!
+    addCategory(input: CategoryInput!): Category!
+    addSubCategory(input: SubCategoryInput!): SubCategory!
+    addTag(input: TagInput!): Tag!
+    addBook(input: BookInput!): Book!
+    updateBook(input: BookInput!): Book!
+    deleteBookAsync(id: String!): Boolean!
+    addDeal(input: DealInput!): Deal!
+    deleteDealAsync(id: String!): Boolean!
+    updateDeal(input: DealInput!): Deal!
+    addCinema(input: CinemaInput!): Cinema!
+    updateCinema(input: CinemaInput!): Cinema!
+    deleteCinemaAsync(id: String!): Boolean!
+    addEvent(input: EventInput!): Event!
+    updateEvent(input: EventInput!): Event!
+    deleteEventAsync(id: String!): Boolean!
+    addJob(input: JobInput!): Job!
+    updateJob(input: JobInput!): Job!
+    deleteJobAsync(id: String!): Boolean!
+    addAttraction(input: AttractionInput!): Attraction!
+    updateAttraction(input: AttractionInput!): Attraction!
+    deleteAttractionAsync(id: String!): Boolean!
+    addToDo(input: ToDoInput!): ToDo!
+    updateToDo(input: ToDoInput!): ToDo!
+    deleteToDoAsync(id: String!): Boolean!
+    addStory(input: StoryInput!): Story!
+    updateStory(input: StoryInput!): Story!
+    deleteStoryAsync(id: String!): Boolean!
+    addVideo(input: VideoInput!): Video!
+    updateVideo(input: VideoInput!): Video!
+    deleteVideoAsync(id: String!): Boolean!
+    addQR(input: QRInput!): QR!
+    updateQR(input: QRInput!): QR!
+    deleteQRAsync(id: String!): Boolean!
+    addRadio(input: RadioInput!): Radio!
+    updateRadio(input: RadioInput!): Radio!
+    deleteRadioAsync(id: String!): Boolean!
+}
+
+type Subscription {
+    placeAdded: Place!
+}
+
+type SearchData {
+    id: String!
+    createdAt: String!
+    updatedAt: String
+    categories: [Category!]!
+    subCategories: [SubCategory!]!
+    tags: [Tag!]!
+}
+
+input FilterDataInput {
+    searchText: String!
+    categories: [Int!]
+    subCategories: [Int!]
+    tags: [Int!]
+    sort: Int
+    maxDistance: Float
+    lat: Float
+    lon: Float
+    minRating: Int
+    subscription: [Int!]
+    origin: String
+    soccerTeam: String
+    open: Boolean
+    popular: Boolean
+}
+
+type SearchResult {
+    users: [User!]!
+    places: [Place!]!
+    attractions: [Attraction!]!
+    jobs: [Job!]!
+    books: [Book!]!
+    events: [Event!]!
+    deals: [Deal!]!
+}
+
+type Country {
+    id: Int!
+    createdAt: String!
+    updatedAt: String
+    nameDe: String
+    nameEn: String
+    nameTr: String
+    imageLight: String
+    imageDark: String
+}
+
+type Place {
+    id: String!
+    name: String!
+    image: String!
+    images: [String!]!
+    logo: String
+    category: String
+    userId: String
+    userIds: [String!]
+    description: String
+    reviews: [Review!]
+    owner: String!
+    createdAt: String!
+    updatedAt: String
+    community: String
+    street: String
+    addressAddition: String
+    phone: String
+    phoneCountryCode: String
+    whatsapp: String
+    waCountryCode: String
+    email: String
+    zip: String
+    city: String
+    country: String
+    countryCode: String
+    web: String
+    facebook: String
+    instagram: String
+    youtube: String
+    tikTok: String
+    google: String
+    delivery: String
+    wolt: String
+    uberEats: String
+    info: String
+    infoTr: String
+    infoEn: String
+    tags: [String!]
+    latitude: Float
+    longitude: Float
+    mapMarker: String
+    hours: String
+    subscription: Int
+    items: [String!]
+    status: Int
+    isPublic: Boolean!
+    seenStatus: Boolean
+    rating: Float
+}
+
+type User {
+    id: String!
+    firstname: String
+    lastname: String
+    nickname: String
+    email: String!
+    phone: String
+    phoneCountryCode: String
+    whatsapp: String
+    waCountryCode: String
+    gender: Int
+    birthday: String
+    role: Int
+    image: String
+    userId: String!
+    pushTokens: [String!]
+    street: String
+    zip: String
+    city: String
+    country: String
+    bio: String
+    origin: String
+    facebook: String
+    instagram: String
+    twitter: String
+    soccerTeam: String
+    places: [Place!]
+    likes: Int
+    reviews: Int
+    username: String
+    createdAt: String!
+    updatedAt: String
+}
+
+type Review {
+    id: String!
+    createdAt: String!
+    updatedAt: String
+    place: String!
+    userId: String
+    username: String
+    userImage: String
+    reported: Boolean!
+    placeLiked: Boolean!
+    likes: [String!]
+    rating: Float!
+    text: String!
+    images: [String!]
+    reply: String
+}
+
+type Deal {
+    id: String!
+    userId: String
+    name: String!
+    nameTr: String
+    nameEn: String
+    category: String
+    status: Int
+    image: String
+    web: String
+    createdAt: String!
+    updatedAt: String
+    price: String
+    dealPrice: String
+    coupon: String
+    freeShipping: String
+    isLocal: Boolean
+    address: String
+    vendor: String
+    description: String
+    descriptionTr: String
+    descriptionEn: String
+    dealEnd: String
+    landscape: Boolean!
+}
+
+type Book {
+    id: String!
+    userId: String
+    name: String!
+    image: String
+    category: String
+    web: String
+    createdAt: String!
+    updatedAt: String
+    author: String
+    language: String
+    languageTr: String
+    languageEn: String
+    text: String
+    textTr: String
+    textEn: String
+}
+
+type Cinema {
+    id: String!
+    userId: String
+    name: String!
+    image: String
+    category: String
+    categoryIcon: Int
+    status: Int
+    web: String
+    createdAt: String!
+    updatedAt: String
+    director: String
+    cast: String
+    story: String
+    storyTr: String
+    storyEn: String
+    url: String
+}
+
+type Event {
+    id: String!
+    userId: String
+    name: String!
+    type: Int!
+    image: String
+    category: String
+    description: String
+    categoryIcon: Int
+    status: Int
+    createdAt: String!
+    updatedAt: String
+    t1Address: String
+    t1ShopName: String
+    t2Address: String
+    t2ShopName: String
+    t3Address: String
+    t3ShopName: String
+    t4Address: String
+    t4ShopName: String
+    t5Address: String
+    t5ShopName: String
+    street: String
+    ticket: String
+    phone: String
+    startDate: String!
+    endDate: String
+    email: String
+    zip: String
+    city: String
+    country: String
+    web: String
+    eventim: String
+    gecetix: String
+    buyticket: String
+    info: String
+    infoTr: String
+    infoEn: String
+    location: String
+    latitude: Float
+    longitude: Float
+    organizer: String
+}
+
+type Job {
+    id: String!
+    userId: String
+    name: String!
+    image: String
+    category: String
+    web: String
+    createdAt: String!
+    updatedAt: String
+}
+
+type Attraction {
+    id: String!
+    userId: String
+    name: String!
+    image: String
+    category: String
+    images: [String!]
+    categoryIcon: Int
+    webUrl: String
+    ticket: String
+    google: String
+    instagram: String
+    createdAt: String!
+    updatedAt: String
+    street: String
+    text: String
+    textTr: String
+    textEn: String
+    sourceImage: String
+    sourceUrl: String
+    phone: String
+    zip: String
+    city: String
+    country: String
+    latitude: Float
+    longitude: Float
+}
+
+type ToDo {
+    id: String!
+    name: String!
+    done: Boolean
+    createdAt: String!
+    updatedAt: String
+}
+
+type Story {
+    id: String!
+    userId: String
+    name: String!
+    title: String
+    titleTr: String
+    image: String
+    images: [String!]
+    gifs: [String!]
+    videos: [String!]
+    createdAt: String!
+    updatedAt: String
+}
+
+type Video {
+    id: String!
+    userId: String
+    title: String!
+    category: String
+    url: String
+    createdAt: String!
+    updatedAt: String
+}
+
+type QR {
+    id: String!
+    placeId: String
+    userId: String
+    code: String
+    name: String
+    isAssigned: Boolean
+    createdAt: String!
+    updatedAt: String
+}
+
+type Radio {
+    id: String!
+    url: String!
+    title: String!
+    order: Int
+    popular: Boolean!
+    image: String!
+    category: String
+    categoryTr: String
+    categoryEn: String
+    language: String!
+    createdAt: String!
+    updatedAt: String
+}
+
+input PlaceInput {
+    id: String!
+    name: String!
+    image: String!
+    images: [String!]!
+    logo: String
+    category: String
+    userId: String
+    userIds: [String!]
+    description: String
+    reviews: [ReviewInput!]
+    owner: String!
+    createdAt: String!
+    updatedAt: String
+    community: String
+    street: String
+    addressAddition: String
+    phone: String
+    phoneCountryCode: String
+    whatsapp: String
+    waCountryCode: String
+    email: String
+    zip: String
+    city: String
+    country: String
+    countryCode: String
+    web: String
+    facebook: String
+    instagram: String
+    youtube: String
+    tikTok: String
+    google: String
+    delivery: String
+    wolt: String
+    uberEats: String
+    info: String
+    infoTr: String
+    infoEn: String
+    tags: [String!]
+    latitude: Float
+    longitude: Float
+    mapMarker: String
+    hours: String
+    subscription: Int
+    items: [String!]
+    status: Int
+    isPublic: Boolean!
+    seenStatus: Boolean
+    rating: Float
+}
+
+input ReviewInput {
+    id: String!
+    createdAt: String!
+    updatedAt: String
+    place: String!
+    userId: String
+    username: String
+    userImage: String
+    reported: Boolean!
+    placeLiked: Boolean!
+    likes: [String!]
+    rating: Float!
+    text: String!
+    images: [String!]
+    reply: String
+}
+
+input UserInput {
+    id: String!
+    firstname: String
+    lastname: String
+    nickname: String
+    email: String!
+    phone: String
+    phoneCountryCode: String
+    whatsapp: String
+    waCountryCode: String
+    gender: Int
+    birthday: String
+    role: Int
+    image: String
+    userId: String!
+    pushTokens: [String!]
+    street: String
+    zip: String
+    city: String
+    country: String
+    bio: String
+    origin: String
+    facebook: String
+    instagram: String
+    twitter: String
+    soccerTeam: String
+    places: [PlaceInput!]
+    likes: Int
+    reviews: Int
+    username: String
+    createdAt: String!
+    updatedAt: String
+}
+
+type Category {
+    id: Int!
+    createdAt: String!
+    updatedAt: String
+    nameDe: String
+    nameEn: String
+    nameTr: String
+    imageLight: String
+    imageDark: String
+    subIds: [String!]
+    typeIds: [String!]
+    subs: [SubCategory!]
+    tagIds: [String!]
+    tags: [Tag!]
+}
+
+input CategoryInput {
+    id: Int!
+    createdAt: String!
+    updatedAt: String
+    nameDe: String
+    nameEn: String
+    nameTr: String
+    imageLight: String
+    imageDark: String
+    subIds: [String!]
+    typeIds: [String!]
+    subs: [SubCategoryInput!]
+    tagIds: [String!]
+    tags: [TagInput!]
+}
+
+type SubCategory {
+    id: Int!
+    createdAt: String!
+    updatedAt: String
+    nameDe: String
+    nameEn: String
+    nameTr: String
+    imageLight: String
+    imageDark: String
+    tagIds: [String!]
+    tags: [Tag!]
+}
+
+input SubCategoryInput {
+    id: Int!
+    createdAt: String!
+    updatedAt: String
+    nameDe: String
+    nameEn: String
+    nameTr: String
+    imageLight: String
+    imageDark: String
+    tagIds: [String!]
+    tags: [TagInput!]
+}
+
+type Tag {
+    id: Int!
+    createdAt: String!
+    updatedAt: String
+    nameDe: String
+    nameEn: String
+    nameTr: String
+    imageLight: String
+    imageDark: String
+    typeIds: [String!]
+}
+
+input TagInput {
+    id: Int!
+    createdAt: String!
+    updatedAt: String
+    nameDe: String
+    nameEn: String
+    nameTr: String
+    imageLight: String
+    imageDark: String
+    typeIds: [String!]
+}
+
+input BookInput {
+    id: String!
+    userId: String
+    name: String!
+    image: String
+    category: String
+    web: String
+    createdAt: String!
+    updatedAt: String
+    author: String
+    language: String
+    languageTr: String
+    languageEn: String
+    text: String
+    textTr: String
+    textEn: String
+}
+
+input DealInput {
+    id: String!
+    userId: String
+    name: String!
+    nameTr: String
+    nameEn: String
+    category: String
+    status: Int
+    image: String
+    web: String
+    createdAt: String!
+    updatedAt: String
+    price: String
+    dealPrice: String
+    coupon: String
+    freeShipping: String
+    isLocal: Boolean
+    address: String
+    vendor: String
+    description: String
+    descriptionTr: String
+    descriptionEn: String
+    dealEnd: String
+    landscape: Boolean!
+}
+
+input CinemaInput {
+    id: String!
+    userId: String
+    name: String!
+    image: String
+    category: String
+    categoryIcon: Int
+    status: Int
+    web: String
+    createdAt: String!
+    updatedAt: String
+    director: String
+    cast: String
+    story: String
+    storyTr: String
+    storyEn: String
+    url: String
+}
+
+input EventInput {
+    id: String!
+    userId: String
+    name: String!
+    type: Int!
+    image: String
+    category: String
+    description: String
+    categoryIcon: Int
+    status: Int
+    createdAt: String!
+    updatedAt: String
+    t1Address: String
+    t1ShopName: String
+    t2Address: String
+    t2ShopName: String
+    t3Address: String
+    t3ShopName: String
+    t4Address: String
+    t4ShopName: String
+    t5Address: String
+    t5ShopName: String
+    street: String
+    ticket: String
+    phone: String
+    startDate: String!
+    endDate: String
+    email: String
+    zip: String
+    city: String
+    country: String
+    web: String
+    eventim: String
+    gecetix: String
+    buyticket: String
+    info: String
+    infoTr: String
+    infoEn: String
+    location: String
+    latitude: Float
+    longitude: Float
+    organizer: String
+}
+
+input JobInput {
+    id: String!
+    userId: String
+    name: String!
+    image: String
+    category: String
+    web: String
+    createdAt: String!
+    updatedAt: String
+}
+
+input AttractionInput {
+    id: String!
+    userId: String
+    name: String!
+    image: String
+    category: String
+    images: [String!]
+    categoryIcon: Int
+    webUrl: String
+    ticket: String
+    google: String
+    instagram: String
+    createdAt: String!
+    updatedAt: String
+    street: String
+    text: String
+    textTr: String
+    textEn: String
+    sourceImage: String
+    sourceUrl: String
+    phone: String
+    zip: String
+    city: String
+    country: String
+    latitude: Float
+    longitude: Float
+}
+
+input ToDoInput {
+    id: String!
+    name: String!
+    done: Boolean
+    createdAt: String!
+    updatedAt: String
+}
+
+input StoryInput {
+    id: String!
+    userId: String
+    name: String!
+    title: String
+    titleTr: String
+    image: String
+    images: [String!]
+    gifs: [String!]
+    videos: [String!]
+    createdAt: String!
+    updatedAt: String
+}
+
+input VideoInput {
+    id: String!
+    userId: String
+    title: String!
+    category: String
+    url: String
+    createdAt: String!
+    updatedAt: String
+}
+
+input QRInput {
+    id: String!
+    placeId: String
+    userId: String
+    code: String
+    name: String
+    isAssigned: Boolean
+    createdAt: String!
+    updatedAt: String
+}
+
+input RadioInput {
+    id: String!
+    url: String!
+    title: String!
+    order: Int
+    popular: Boolean!
+    image: String!
+    category: String
+    categoryTr: String
+    categoryEn: String
+    language: String!
+    createdAt: String!
+    updatedAt: String
+}

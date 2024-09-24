@@ -1,0 +1,9 @@
+mutation AddToDo($input: ToDoInput!) {
+    addToDo(input: $input) {
+        id,
+        name,
+        createdAt,
+        updatedAt,
+        done,
+    }
+}
